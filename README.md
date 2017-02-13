@@ -6,8 +6,8 @@ Minimalistic zsh prompt theme.
 
 Features:
 
-  - git branch
-  - Current prompt (basename) 
   - Status code
+  - Current path (basename) 
+  - git branch
 
 That's it.
