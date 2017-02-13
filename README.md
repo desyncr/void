@@ -2,6 +2,10 @@
 
 Minimalistic zsh prompt theme.
 
+![void](screenshot.png)
+
+Features:
+
   - git branch
   - Current prompt (basename) 
   - Status code
