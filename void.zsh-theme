@@ -11,7 +11,7 @@ precmd_vcs_info() { vcs_info  }
 precmd_functions+=( precmd_vcs_info precmd_void_exit_code  )
 
 export PS1='%{$fg[$void_exit_code]%} ›%{$reset_color%} '
-export RPROMPT='%{$fg[blue]%}$(basename $PWD)$vcs_info_msg_0_'
+export RPROMPT='%{$fg[blue]%}$(basename $PWD)$vcs_info_msg_0_%{$reset_color%}'
 
 # show git branch name
 zstyle ':vcs_info:*:*' formats ' · %b'
