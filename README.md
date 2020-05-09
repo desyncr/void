@@ -4,12 +4,12 @@ Minimalistic zsh prompt theme.
 
 ![void](screenshot.png)
 
-Features:
+## Features
 
   - Status code
   - Current path (basename)
 
-Git features:
+## Git features
 
 ![git-prompt](screenshot-git.png)
 
@@ -28,5 +28,16 @@ push is an alias for git push -u origin
 
 Aliases are dynamically set up and tear down when entering a git project.
 
-
 That's it.
+
+## Install
+
+### Manual
+
+- Clone this repository
+- source void.zsh-theme
+
+### Antigen
+
+- antigen theme desyncr/void
+
