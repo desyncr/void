@@ -11,7 +11,6 @@ precmd_void_git_prompt() { if [[ -n $vcs_info_msg_0_ ]]; then void_git_prompt="g
 # handle vcs_info
 precmd_vcs_info() { vcs_info  }
 precmd_functions+=( precmd_vcs_info precmd_void_exit_code )
-echo "ASD"
 if [[ -n $VOID_GIT_PROMPT ]]; then
     precmd_functions+=( precmd_void_git_prompt )
 fi
