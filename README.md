@@ -12,4 +12,6 @@ Features:
   - Git prompt (VOID_GIT_PROMPT=1)
   - Git prompt aliases
 
+![git-prompt](git-prompt.png)
+
 That's it.
