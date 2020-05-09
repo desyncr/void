@@ -5,8 +5,10 @@ git-prompt-alias() {
     alias status="git status"
     alias c="git commit "
     alias commit="git commit "
+    alias d="git diff "
+    alias show="git show "
 }
 
 git-prompt-unalias() {
-    unalias add push s status c commit
+    unalias add push s status c commit d show
 }

@@ -8,7 +8,8 @@ Features:
 
   - Status code
   - Current path (basename) 
-  - git branch
-  - git prompt (VOID_GIT_PROMPT=1)
+  - Git branch
+  - Git prompt (VOID_GIT_PROMPT=1)
+  - Git prompt aliases
 
 That's it.
