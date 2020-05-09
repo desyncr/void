@@ -4,7 +4,7 @@ git-prompt-alias() {
     alias s="git status"
     alias status="git status"
     alias co="git co "
-    alias branch="git co -b "
+    alias branch="git checkout -b "
     alias commit="git commit "
     alias d="git diff "
     alias show="git show "
