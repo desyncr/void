@@ -12,6 +12,16 @@ Features:
   - Git prompt (VOID_GIT_PROMPT=1)
   - Git prompt aliases
 
-![git-prompt](git-prompt.png)
+```
+git › commit -m "update git prompt alias"
+...
+git › push
+...
+git › type push
+push is an alias for git push -u origin 
+```
+
+Aliases are dynamically set up and tear down when entering a git project.
+
 
 That's it.
