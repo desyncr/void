@@ -14,10 +14,11 @@ Git features:
   - Git prompt and aliases (VOID_GIT_PROMPT=1)
 
 ```
-git › commit -m "update git prompt alias"
+git › vim git-prompt.sh
+git › add .
+git › commit -m 'Update aliases'
 ...
 git › push
-...
 git › type push
 push is an alias for git push -u origin 
 ```
