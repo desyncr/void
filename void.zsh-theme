@@ -25,7 +25,7 @@ precmd_void_git_prompt() {
 precmd_vcs_info() { vcs_info  }
 precmd_functions+=( precmd_vcs_info precmd_void_exit_code )
 if [[ -n $VOID_GIT_PROMPT ]]; then
-    source $PWD/git-prompt.sh
+    source ${${(%):-%x}:A:h}/git-prompt.sh
     precmd_functions+=( precmd_void_git_prompt )
 fi
 
