@@ -7,10 +7,11 @@ Minimalistic zsh prompt theme.
 Features:
 
   - Status code
-  - Current path (basename) 
+  - Current path (basename)
+  
+Git features:
   - Git branch
-  - Git prompt (VOID_GIT_PROMPT=1)
-  - Git prompt aliases
+  - Git prompt and aliases (VOID_GIT_PROMPT=1)
 
 ```
 git › commit -m "update git prompt alias"
