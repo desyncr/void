@@ -14,7 +14,7 @@ Minimalistic zsh prompt theme.
 ![git-prompt](screenshot-git.png)
 
   - Git branch
-  - Git prompt and aliases (VOID_GIT_PROMPT=1)
+  - Git prompt and aliases
 
 ```
 git › vim git-prompt.sh

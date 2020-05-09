@@ -24,10 +24,8 @@ precmd_void_git_prompt() {
 # handle vcs_info
 precmd_vcs_info() { vcs_info  }
 precmd_functions+=( precmd_vcs_info precmd_void_exit_code )
-if [[ -n $VOID_GIT_PROMPT ]]; then
-    source ${${(%):-%x}:A:h}/git-prompt.sh
-    precmd_functions+=( precmd_void_git_prompt )
-fi
+source ${${(%):-%x}:A:h}/git-prompt.sh
+precmd_functions+=( precmd_void_git_prompt )
 
 export PS1='%{$fg[blue]%}$void_git_prompt%{$fg[$void_exit_code]%} ›%{$reset_color%} '
 export RPROMPT='%{$fg[blue]%}$(basename $PWD)$vcs_info_msg_0_%{$reset_color%}'
