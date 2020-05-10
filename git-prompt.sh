@@ -1,16 +1,21 @@
 git-prompt-alias() {
-    alias add="git add "
-    alias push="git push -u origin "
-    alias s="git status"
-    alias status="git status"
-    alias co="git co "
-    alias branch="git checkout -b "
-    alias commit="git commit "
-    alias d="git diff "
-    alias show="git show "
-    alias up="git pull"
+    alias add="git add " \
+        push="git push -u origin " \
+        s="git status" \
+        status="git status" \
+        co="git checkout" \
+        branch="git checkout -b " \
+        commit="git commit " \
+        com="git commit " \
+        d="git diff " \
+        show="git show " \
+        up="git pull" \
+        reflog="git reflog" \
+        stash="git stash "
 }
 
 git-prompt-unalias() {
-    unalias add push s status co branch commit d show up
+    unalias add push s status co \
+        branch commit com d show up \
+        reflog stash
 }
