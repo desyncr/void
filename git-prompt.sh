@@ -12,12 +12,13 @@ git-prompt-alias() {
         up="git pull" \
         pull="git pull" \
         reflog="git reflog" \
-        stash="git stash"
-        remote="git remote"
+        stash="git stash" \
+        remote="git remote" \
+        logs="git log"
 }
 
 git-prompt-unalias() {
     unalias add push s status co \
         branch commit com d show up pull \
-        reflog stash remote
+        reflog stash remote logs
 }
