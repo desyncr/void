@@ -1,34 +1,58 @@
 autoload -Uz colors && colors
-autoload -Uz vcs_info
 setopt prompt_subst
 
-# set up exit_code
-typeset -g void_exit_code
-precmd_void_exit_code() { if (( $? == 0 )); then void_exit_code="blue"; else void_exit_code="red"; fi }
+typeset -g _LAST_COMMAND_EXIT_CODE
 
-typeset -g void_git_prompt_
-precmd_void_git_prompt() {
-    if [[ -n $vcs_info_msg_0_ ]]; then
-        if [[ $void_git_prompt != "git" ]]; then
-            void_git_prompt="git";
-            git-prompt-alias;
-        fi
-    else
-        if [[ $void_git_prompt != "" ]]; then
-            void_git_prompt="";
-            git-prompt-unalias;
-        fi
-    fi
+precmd_reset_prompts() {
+    PS1='%{$fg[blue]%} ›%{$reset_color%} '
+    RPROMPT='%{$fg[blue]%}%{$reset_color%}'
 }
 
-# handle vcs_info
-precmd_vcs_info() { vcs_info  }
-precmd_functions+=( precmd_vcs_info precmd_void_exit_code )
-source ${${(%):-%x}:A:h}/git-prompt.sh
-precmd_functions+=( precmd_void_git_prompt )
+async_exit_code() {
+    void_exit_code=$(<&$1)
+    PS1='%{$fg[blue]%}%{$fg[$void_exit_code]%} ›%{$reset_color%} '
 
-export PS1='%{$fg[blue]%}$void_git_prompt%{$fg[$void_exit_code]%} ›%{$reset_color%} '
-export RPROMPT='%{$fg[blue]%}$(basename $PWD)$vcs_info_msg_0_%{$reset_color%}'
+    zle reset-prompt
 
-# show git branch name
-zstyle ':vcs_info:*:*' formats ' · %b'
+    zle -F $1
+    exec {1}<&-
+}
+
+precmd_async_exit_code() {
+    _LAST_COMMAND_EXIT_CODE=$?
+
+    exec {FD}< <(
+        if (( $_LAST_COMMAND_EXIT_CODE == 0 )); then echo "blue"; else echo "red"; fi
+    )
+
+    zle -F $FD async_exit_code
+}
+
+async_branch() {
+    void_branch=$(<&$1)
+    [ -n "$void_branch" ] &&
+        void_branch=" - $void_branch";
+
+    RPROMPT='%{$fg[blue]%}$(basename $PWD)$void_branch%{$reset_color%}'
+
+    zle reset-prompt
+
+    zle -F $1
+    exec {1}<&-
+}
+
+precmd_async_branch() {
+    exec {FD}< <(
+        echo $(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+    )
+
+    zle -F $FD async_branch
+}
+
+# Set precmd hooks to reset the prompt and then asynchronuously get
+# branch and exit code information.
+add-zsh-hook precmd precmd_reset_prompts
+# I'm using different hooks for exit_code and branch as they use
+# different file descriptors.
+add-zsh-hook precmd precmd_async_exit_code
+add-zsh-hook precmd precmd_async_branch
