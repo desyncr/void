@@ -8,16 +8,6 @@ precmd_reset_prompts() {
     RPROMPT='%{$fg[blue]%}%{$reset_color%}'
 }
 
-async_exit_code() {
-    void_exit_code=$(<&$1)
-    PS1='%{$fg[blue]%}%{$fg[$void_exit_code]%} ›%{$reset_color%} '
-
-    zle reset-prompt
-
-    zle -F $1
-    exec {1}<&-
-}
-
 precmd_async_exit_code() {
     _LAST_COMMAND_EXIT_CODE=$?
 
@@ -33,7 +23,10 @@ async_branch() {
     [ -n "$void_branch" ] &&
         void_branch=" - $void_branch";
 
-    RPROMPT='%{$fg[blue]%}$(basename $PWD)$void_branch%{$reset_color%}'
+    void_hostname=""
+    [[ "$SSH_CLIENT" != "" ]] && void_hostname=" | $(hostname)"
+
+    RPROMPT='%{$fg[blue]%}$(basename $PWD)$void_branch%{$reset_color%}$void_hostname'
 
     zle reset-prompt
 
@@ -48,6 +41,17 @@ precmd_async_branch() {
 
     zle -F $FD async_branch
 }
+
+async_exit_code() {
+    void_exit_code=$(<&$1)
+    PS1='%{$fg[blue]%}%{$fg[$void_exit_code]%} ›%{$reset_color%} '
+
+    zle reset-prompt
+
+    zle -F $1
+    exec {1}<&-
+}
+
 
 # Set precmd hooks to reset the prompt and then asynchronuously get
 # branch and exit code information.
