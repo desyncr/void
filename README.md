@@ -9,7 +9,7 @@ Minimalistic zsh prompt theme.
   - Status code
   - Current path (basename)
   - Git branch
-
+  - Hostname (in SSH connection)
 
 That's it.
 
